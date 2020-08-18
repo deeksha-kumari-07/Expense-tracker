@@ -1,0 +1,32 @@
+body {
+    background-image: url("bg-image.jpg"); }
+
+#innerBody {
+    width: 40%; }
+
+.font-1_3 {
+    font-size: 1.3rem; }
+
+.font-1_5 {
+    font-size: 1.5rem; }
+
+.font-1_1 {
+    font-size: 1.1rem; }
+
+.addition-card {
+    border-right: 6px green solid; }
+
+.minus-card {
+    border-right: 6px red solid; }
+
+#addTransaction {
+    background-color: mediumpurple; }
+
+.elipsis {
+    overflow: hidden;
+    white-space: nowrap;
+    text-overflow: ellipsis;
+}
+.clear-history {
+    cursor: pointer;
+}
