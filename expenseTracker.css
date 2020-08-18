@@ -20,7 +20,8 @@ body {
     border-right: 6px red solid; }
 
 #addTransaction {
-    background-color: mediumpurple; }
+    background-color: mediumpurple;
+    color: white; }
 
 .elipsis {
     overflow: hidden;
