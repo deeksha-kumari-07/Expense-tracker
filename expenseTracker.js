@@ -1,3 +1,4 @@
+var defaultValue = "0";
 //This method handles the click of Add transaction button
 function handleAddtransaction() {
     var inputAmount = document.getElementById("inputAmount");
@@ -16,7 +17,7 @@ function handleAddtransaction() {
 function addtransactionHistory() {
     var enteredAmount = document.getElementById("inputAmount").value;
     var enteredText = document.getElementById("inputText").value;
-    if (enteredAmount.charAt(0) === "-") {
+    if (+enteredAmount < 0) {
         var dummyMinusCard = document.querySelector("#dummyMinusCard");
         var expenseRow = dummyMinusCard.cloneNode(true);
         expenseRow.id = "minusCard" + enteredText;
@@ -43,14 +44,14 @@ function updateIncomeAndExpense() {
     var totalExpense = document.getElementById("expenseAmount").innerHTML;
     var totalIncome = document.getElementById("incomeAmount").innerHTML;
     var enteredAmount = document.getElementById("inputAmount").value;
-    if (enteredAmount.charAt(0) === "-") {
+    if (+enteredAmount < 0) {
         var resultedExpense = +totalExpense + +enteredAmount;
-        var resultedExpenseString = resultedExpense;
+        var resultedExpenseString = resultedExpense.toString();
         document.getElementById("expenseAmount").innerHTML = resultedExpenseString;
     }
     else {
         var resultedIncome = +totalIncome + +enteredAmount;
-        var resultedIncomeString = resultedIncome;
+        var resultedIncomeString = resultedIncome.toString();
         document.getElementById("incomeAmount").innerHTML = resultedIncomeString;
     }
 }
@@ -60,7 +61,7 @@ function calculateTotalBalance() {
     var totalIncome = document.getElementById("incomeAmount").innerHTML;
     var totalBalance = document.getElementById("balanceAmount").innerHTML;
     var balance = +totalIncome + +totalExpense;
-    var resultedbalance = balance;
+    var resultedbalance = balance.toString();
     document.getElementById("balanceAmount").innerHTML = resultedbalance;
 }
 //This method clears the Hisotry of transaction
@@ -69,9 +70,9 @@ function clearHistory() {
     historyCards.forEach(function (element) {
         element.parentNode.removeChild(element);
     });
-    document.getElementById("expenseAmount").innerHTML = "0";
-    document.getElementById("incomeAmount").innerHTML = "0";
-    document.getElementById("balanceAmount").innerHTML = "0";
+    document.getElementById("expenseAmount").innerHTML = defaultValue;
+    document.getElementById("incomeAmount").innerHTML = defaultValue;
+    document.getElementById("balanceAmount").innerHTML = defaultValue;
     document.querySelector(".clear-history").classList.add("d-none");
 }
 document.addEventListener("DOMContentLoaded", function (event) {

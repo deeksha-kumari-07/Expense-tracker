@@ -1,3 +1,5 @@
+const defaultValue = "0";
+
 //This method handles the click of Add transaction button
 function handleAddtransaction() {
     let inputAmount = document.getElementById("inputAmount") as HTMLInputElement;
@@ -19,7 +21,7 @@ function addtransactionHistory() {
     let enteredAmount = (document.getElementById("inputAmount") as HTMLInputElement).value;
     let enteredText = (document.getElementById("inputText") as HTMLInputElement).value;
 
-    if(enteredAmount!.charAt(0) === "-") {
+    if(+enteredAmount < 0) {
         let dummyMinusCard = document.querySelector("#dummyMinusCard");
         let expenseRow = dummyMinusCard!.cloneNode(true) as Element;
         expenseRow.id = "minusCard" + enteredText;
@@ -48,14 +50,15 @@ function updateIncomeAndExpense() {
     let totalExpense = document.getElementById("expenseAmount")!.innerHTML;
     let totalIncome = document.getElementById("incomeAmount")!.innerHTML;
     let enteredAmount = (document.getElementById("inputAmount") as HTMLInputElement).value;
-    if(enteredAmount!.charAt(0) === "-") {
+    
+    if(+enteredAmount < 0) {
         let resultedExpense = +totalExpense + +enteredAmount;
-        let resultedExpenseString = resultedExpense as unknown as string;
+        let resultedExpenseString = resultedExpense.toString();
         document.getElementById("expenseAmount")!.innerHTML = resultedExpenseString;
     }
     else {
         let resultedIncome = +totalIncome + +enteredAmount;
-        let resultedIncomeString = resultedIncome as unknown as string;
+        let resultedIncomeString = resultedIncome.toString();
         document.getElementById("incomeAmount")!.innerHTML = resultedIncomeString;
     }
 }
@@ -66,7 +69,7 @@ function calculateTotalBalance() {
     let totalIncome = document.getElementById("incomeAmount")!.innerHTML;
     let totalBalance = document.getElementById("balanceAmount")!.innerHTML;
     let balance = +totalIncome + +totalExpense;
-    let resultedbalance = balance as unknown as string;
+    let resultedbalance = balance.toString();
     document.getElementById("balanceAmount")!.innerHTML = resultedbalance;
 }
 
@@ -76,9 +79,9 @@ function clearHistory() {
     historyCards.forEach(element => {
         element!.parentNode!.removeChild(element);
     });
-    document.getElementById("expenseAmount")!.innerHTML = "0";
-    document.getElementById("incomeAmount")!.innerHTML = "0";
-    document.getElementById("balanceAmount")!.innerHTML = "0"; 
+    document.getElementById("expenseAmount")!.innerHTML = defaultValue;
+    document.getElementById("incomeAmount")!.innerHTML = defaultValue;
+    document.getElementById("balanceAmount")!.innerHTML = defaultValue;
     document.querySelector(".clear-history")!.classList.add("d-none");
 }
 
@@ -87,3 +90,4 @@ document.addEventListener("DOMContentLoaded", function(event) {
     document.getElementById("clearHistory")!.addEventListener("click", clearHistory);
   
 });
+
